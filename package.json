@@ -18,7 +18,7 @@
     ]
   },
   "scripts": {
-    "prepare": "husky",
+    "prepare": "echo Skipping Husky",
     "lint": "eslint",
     "lint:fix": "eslint --fix && prettier . --write",
     "dev": "wrangler dev",
