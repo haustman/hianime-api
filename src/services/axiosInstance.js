@@ -2,7 +2,7 @@ import config from '../config/config.js';
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
-const TIMEOUT = 10000;
+const TIMEOUT = 15000;
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -26,12 +26,18 @@ export const axiosInstance = async (endpoint, retries = MAX_RETRIES) => {
       const response = await fetch(url, {
         headers: {
           ...(config.headers || {}),
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          'Accept-Language': 'en-US,en;q=0.5',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9',
           'Accept-Encoding': 'gzip, deflate, br',
           'Connection': 'keep-alive',
           'Upgrade-Insecure-Requests': '1',
           'Cache-Control': 'max-age=0',
+          'Referer': config.baseurl + '/',
+          'DNT': '1',
+          'Sec-Fetch-Dest': 'document',
+          'Sec-Fetch-Mode': 'navigate',
+          'Sec-Fetch-Site': 'same-origin',
+          'Sec-Fetch-User': '?1',
         },
         signal: controller.signal,
       });
